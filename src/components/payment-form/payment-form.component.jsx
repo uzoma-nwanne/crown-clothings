@@ -8,7 +8,6 @@ const PaymentForm = ({config, onClose, onSuccess})=>{
     }
     return (
         <div>
-            <h2>Credit Card Payment</h2>
             <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={handlePayment}>Pay Now</Button>
         </div>
     )
