@@ -4,20 +4,22 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import PaymentForm from '../../components/payment-form/payment-form.component';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
-import './checkout.styles.scss';
+import {CheckoutContainer,HeaderBlock, CheckoutHeader, Total} from './checkout.styles';
+
+
 const Checkout = ()=>{
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);
     const currentUser = useSelector(selectCurrentUser);
     const amount = cartTotal * 100;
-    const email = currentUser.email ? currentUser.email : 'user@example.com';
+    const email = currentUser?.email ? currentUser.email : 'user@example.com';
     const config = {
       reference: ((new Date()).getTime() * Math.random()).toString(),
       email: email,
       amount: amount,
-      publicKey: 'pk_test_15488c24a7902fd27bac6c3331b5aa815af38e54',
+      publicKey: process.env.REACT_APP_PAYSTACK_KEY,
   };
-  console.log(currentUser);
+
   const onSuccess = (reference) =>{
     console.log(reference);
   }
@@ -26,30 +28,30 @@ const Checkout = ()=>{
     console.log('Closed');
   }
     return(
-        <div className='checkout-container'>
-        <div className='checkout-header'>
-          <div className='header-block'>
+        <CheckoutContainer>
+        <CheckoutHeader>
+          <HeaderBlock>
             <span>Product</span>
-          </div>
-          <div className='header-block'>
+          </HeaderBlock>
+          <HeaderBlock>
             <span>Description</span>
-          </div>
-          <div className='header-block'>
+          </HeaderBlock>
+          <HeaderBlock>
             <span>Quantity</span>
-          </div>
-          <div className='header-block'>
+          </HeaderBlock>
+          <HeaderBlock>
             <span>Price</span>
-          </div>
-          <div className='header-block'>
+          </HeaderBlock>
+          <HeaderBlock>
             <span>Remove</span>
-          </div>
-        </div>
+          </HeaderBlock>
+        </CheckoutHeader>
         {cartItems.map((cartItem) => (
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))}
-        <div className='total'>TOTAL: ${cartTotal}</div>
+        <Total>TOTAL: ${cartTotal}</Total>
         <PaymentForm config={config} onClose={onClose} onSuccess={onSuccess}/>
-      </div>
+      </CheckoutContainer>
     )
 }
 
