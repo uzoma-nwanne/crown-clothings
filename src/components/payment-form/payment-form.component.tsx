@@ -1,3 +1,4 @@
+import {FC} from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import { PaystackProps } from 'react-paystack/dist/types';
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component';
@@ -6,7 +7,9 @@ import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component';
     onClose?:() => void,
     onSuccess: () => void,
  }
-const PaymentForm = ({config, onClose, onSuccess}: PaymentFormProps )=>{
+
+
+const PaymentForm:FC<PaymentFormProps> = ({config, onClose, onSuccess}: PaymentFormProps )=>{
     const initializePayment = usePaystackPayment(config);
     const handlePayment = () =>{
         initializePayment(onSuccess, onClose);

@@ -6,7 +6,7 @@ import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import Button from '../button/button.component';
 import { signUpStart } from '../../store/user/user.action';
 
-import './sign-up-form.styles.scss';
+import './sign-up-form.styles';
 
 
 const defaultFormFields = {

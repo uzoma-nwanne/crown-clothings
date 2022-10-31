@@ -1,4 +1,4 @@
-import { React, Fragment} from "react";
+import {Fragment} from "react";
 import { useSelector } from "react-redux/es/exports";
 
 import { selectCategoriesMap, selectIsLoading } from "../../store/categories/categories.selector";
